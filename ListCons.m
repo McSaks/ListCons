@@ -163,8 +163,10 @@ Colon /: Map[fn_, x_ \[Colon] xs_] := fn[x] \[Colon] Map[fn, xs];
 Nil   /: Map[_, Nil] = Nil;
 
 (* Operator form *)
-Colon /: Map[fn_][x_ \[Colon] xs_] := Map[fn, x \[Colon] xs];
-Nil /: Map[fn_][Nil] = Nil;
+If[ $VersionNumber >= 10,
+  Colon /: Map[fn_][x_ \[Colon] xs_] := Map[fn, x \[Colon] xs];
+  Nil /: Map[fn_][Nil] = Nil;
+]
 
 
 Colon /: Fold[fn_, z_, x_ \[Colon] xs_] := Fold[fn, fn[z, x], xs];
